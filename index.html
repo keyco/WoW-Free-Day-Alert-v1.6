@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { width: 300px; font-family: 'Segoe UI', sans-serif; padding: 12px; background: #1a1a1a; color: white; }
+        h3 { color: #f8b700; margin-top: 0; text-align: center; border-bottom: 1px solid #444; padding-bottom: 8px; font-size: 1em; }
+        .section-label { font-weight: bold; color: #f8b700; font-size: 0.7em; text-transform: uppercase; margin-bottom: 4px; display: block; }
+        .status-box { background: #252525; padding: 8px; border-radius: 4px; margin-bottom: 10px; border: 1px solid #333; }
+        .current-search { color: #00ff00; font-family: monospace; font-size: 1em; }
+        input { width: 100%; padding: 6px 8px; margin-bottom: 6px; border-radius: 4px; border: 1px solid #444; background: #333; color: white; box-sizing: border-box; }
+        button { background-color: #f8b700; color: black; border: none; padding: 8px; width: 100%; cursor: pointer; border-radius: 4px; font-weight: bold; font-size: 0.9em; margin-bottom: 6px; }
+        button.secondary { background: #444; color: #ddd; }
+        button.danger { background: #8b2e2e; color: #fff; }
+        .news-box { background: #2a2a2a; border-left: 4px solid #f8b700; padding: 8px; margin-top: 10px; font-size: 0.8em; }
+        .news-link { color: #f8b700; font-size: 0.85em; margin-top: 6px; display: inline-block; text-decoration: none; }
+        .news-link:hover { text-decoration: underline; }
+        .news-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 8px; }
+        .news-actions button { width: auto; margin-bottom: 0; padding: 6px 10px; font-size: 0.8em; }
+        .last-check { font-size: 0.65em; color: #888; margin-top: 4px; }
+        .badge-alert { background: #1a3d1a; border: 1px solid #00aa00; border-radius: 4px; padding: 6px 8px; margin-top: 8px; font-size: 0.8em; color: #90ee90; }
+        #historyList { list-style: none; padding: 0; margin: 0 0 8px 0; max-height: 120px; overflow-y: auto; }
+        #historyList li { padding: 4px 8px; background: #252525; margin-bottom: 2px; border-radius: 3px; font-size: 0.85em; display: flex; justify-content: space-between; align-items: center; }
+        #historyList li span { cursor: pointer; }
+        #historyList li span:hover { color: #f8b700; }
+        .history-actions { display: flex; gap: 6px; margin-top: 4px; }
+        .history-actions button { flex: 1; margin-bottom: 0; }
+    </style>
+</head>
+<body>
+    <h3>WoW Sentry v1.6</h3>
+
+    <div class="status-box">
+        <span class="section-label">Buscando actualmente:</span>
+        <span id="currentKeywordDisplay" class="current-search">---</span>
+        <div id="lastCheckTime" class="last-check">Última revisión: Nunca</div>
+        <div id="badgeAlertBox" class="badge-alert" style="display:none;">
+            <span id="badgeAlertText"></span>
+            <button id="clearBadgeBtn" class="secondary" style="margin-top:4px;">Limpiar aviso</button>
+        </div>
+        <button id="clearKeywordBtn" class="secondary" style="margin-top:8px;margin-bottom:0;">Borrar palabra actual</button>
+    </div>
+
+    <span class="section-label">Cambiar palabra clave:</span>
+    <input type="text" id="keywordInput" placeholder="Ej: Gratis, Midnight...">
+    <button id="saveBtn">Actualizar Rastreador</button>
+
+    <span class="section-label">Historial de búsquedas</span>
+    <ul id="historyList"></ul>
+    <div class="history-actions">
+        <button id="clearHistoryBtn" class="danger">Borrar historial</button>
+    </div>
+
+    <div class="news-box">
+        <span class="section-label">Noticia al azar:</span>
+        <p id="randomNews">Cargando curiosidades...</p>
+        <div class="news-actions">
+            <button id="translateNewsBtn" class="secondary" type="button" style="display:none;">Traducir al español</button>
+            <a id="newsSourceLink" href="#" target="_blank" rel="noopener" class="news-link" style="display:none;">Ver fuente →</a>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
